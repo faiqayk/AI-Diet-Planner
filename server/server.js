@@ -84,6 +84,9 @@ async function realAI(msg) {
 
 // CHAT ROUTE
 app.post("/chat", async (req, res) => {
+  app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+});
   try {
     const message = req.body.message;
 
