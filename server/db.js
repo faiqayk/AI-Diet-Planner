@@ -1,7 +1,4 @@
 import mongoose from "mongoose";
-import dns from "dns";
-
-dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 const connectDB = async () => {
   try {
@@ -9,9 +6,7 @@ const connectDB = async () => {
     console.log("✅ MongoDB Connected");
   } catch (error) {
     console.log("❌ MongoDB Error:", error);
-
-    // ❌ DO NOT CRASH SERVER
-    console.log("⚠️ Server will continue without DB");
+    console.log("⚠️ Server will still run without DB");
   }
 };
 

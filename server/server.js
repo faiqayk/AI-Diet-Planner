@@ -152,8 +152,19 @@ app.post("/saveDiet", async (req, res) => {
 // ======================
 // START SERVER (RAILWAY SAFE)
 // ======================
-const PORT = process.env.PORT || 5000;
+const startServer = async () => {
+  try {
+    await connectDB();
+    console.log("DB Connected");
+  } catch (err) {
+    console.log("DB Connection Failed (non-blocking):", err);
+  }
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+  const PORT = process.env.PORT;
+
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+};
+
+startServer();
