@@ -83,6 +83,9 @@ async function realAI(msg) {
 }
 
 // CHAT ROUTE
+app.get("/", (req, res) => {
+  res.send("AI Diet Planner Backend Running ✅");
+});
 app.post("/chat", async (req, res) => {
   try {
     const message = req.body.message;
