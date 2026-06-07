@@ -76,7 +76,7 @@ export default function Dashboard() {
     localStorage.setItem("dietHistory", JSON.stringify(updatedHistory));
 
     // ✅ BACKEND SAVE API (NEW ADD)
-    fetch("http://localhost:5000/saveDiet", {
+    fetch("https://ai-diet-planner-production-9040.up.railway.app/saveDiet", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
