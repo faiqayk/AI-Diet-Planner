@@ -8,14 +8,32 @@ import Diet from "./Diet.js";
 
 dotenv.config();
 
-connectDB();
+// ======================
+// DB CONNECTION
+// ======================
+connectDB()
+  .then(() => console.log("DB Connected"))
+  .catch((err) => console.log("DB Connection Failed:", err));
 
+// ======================
+// APP INIT
+// ======================
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// OpenAI setup
+// ======================
+// ROOT ROUTE (TEST)
+// ======================
+app.get("/", (req, res) => {
+  res.send("AI Diet Planner Backend Running ✅");
+});
+
+// ======================
+// OPENAI SETUP
+// ======================
 let client = null;
 
 if (process.env.OPENAI_API_KEY) {
@@ -24,7 +42,9 @@ if (process.env.OPENAI_API_KEY) {
   });
 }
 
-// FREE AI
+// ======================
+// FREE AI LOGIC
+// ======================
 function freeAI(message) {
   const msg = message.toLowerCase();
 
@@ -53,9 +73,7 @@ function freeAI(message) {
   }
 
   if (msg.includes("diet") || msg.includes("meal")) {
-    reply.push(
-      "Healthy meal 🍽️ = protein 🍗 + vegetables 🥗 + water 💧"
-    );
+    reply.push("Healthy meal 🍽️ = protein 🍗 + vegetables 🥗 + water 💧");
   }
 
   if (reply.length === 0) {
@@ -65,7 +83,9 @@ function freeAI(message) {
   return reply.join("\n\n");
 }
 
-// REAL AI
+// ======================
+// REAL AI (OPENAI)
+// ======================
 async function realAI(msg) {
   try {
     if (!client) return null;
@@ -82,48 +102,35 @@ async function realAI(msg) {
   }
 }
 
+// ======================
 // CHAT ROUTE
-app.get("/", (req, res) => {
-  res.send("AI Diet Planner Backend Running ✅");
-});
+// ======================
 app.post("/chat", async (req, res) => {
   try {
     const message = req.body.message;
 
-    // FREE AI
+    // FREE AI FIRST
     const freeReply = freeAI(message);
-
     if (freeReply) {
-      return res.json({
-        reply: freeReply,
-      });
+      return res.json({ reply: freeReply });
     }
 
     // REAL AI
     const aiReply = await realAI(message);
-
     if (aiReply) {
-      return res.json({
-        reply: aiReply,
-      });
+      return res.json({ reply: aiReply });
     }
 
-    // FALLBACK
-    res.json({
-      reply: "AI temporarily unavailable ⚠️",
-    });
+    res.json({ reply: "AI temporarily unavailable ⚠️" });
   } catch (error) {
     console.log(error);
-
-    res.json({
-      reply: "System error ❌",
-    });
+    res.json({ reply: "System error ❌" });
   }
 });
 
-// ==========================
+// ======================
 // SAVE DIET API
-// ==========================
+// ======================
 app.post("/saveDiet", async (req, res) => {
   try {
     const newDiet = new Diet(req.body);
@@ -142,7 +149,9 @@ app.post("/saveDiet", async (req, res) => {
   }
 });
 
-// START SERVER
+// ======================
+// START SERVER (RAILWAY SAFE)
+// ======================
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
