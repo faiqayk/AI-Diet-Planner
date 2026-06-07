@@ -13,7 +13,7 @@ dotenv.config();
 // ======================
 connectDB()
   .then(() => console.log("DB Connected"))
-  .catch((err) => console.log("DB Connection Failed:", err));
+  .catch((err) => console.log("DB Connection Failed (non-blocking):", err));
 
 // ======================
 // APP INIT
