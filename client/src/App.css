@@ -220,15 +220,21 @@
   right: 0;
   border-right-color: var(--border);
 }
-/* Heading overlap ko theek karne ke liye code */
-#center h1, 
-#center h2, 
-.title { 
-  font-size: 3rem;       /* Aap isko apne mutabiq adjust kar sakte hain */
-  line-height: 1.2;      /* Yeh lines ke darmiyan munasib gap banayega */
-  font-weight: 700;
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 10px;   /* Input fields se thoda gap rakhne ke liye */
-  word-wrap: break-word; /* Agar text bada ho toh screen se baahar na jaye */
+/* ====================================================
+   SUPER ULTIMATE OVERLAP FIX (Put at the very bottom)
+   ==================================================== */
+
+/* 1. Target all possible headings inside #center and .hero */
+#center h1, #center h2, #center h3, #center p, 
+.hero h1, .hero h2, .hero p, .title, h1, h2 {
+  line-height: 1.4 !important;      /* Lines ko alag karne ke liye zaroori gap */
+  letter-spacing: normal !important; /* Agar characters aapas mein jure hain */
+  height: auto !important;          /* Agar height restricted thi */
+  overflow: visible !important;     /* Text ko chhupne se rokne ke liye */
+}
+
+/* 2. Agar text kisi flex/absolute position ki wajah se daba hua hai */
+.hero {
+  height: auto !important;
+  min-height: fit-content !important;
 }
