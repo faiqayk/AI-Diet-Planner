@@ -9,121 +9,132 @@ import Diet from "./Diet.js";
 dotenv.config();
 
 // ======================
-// DB CONNECTION
+// DEBUG ENV
+// ======================
+console.log("API KEY:", process.env.OPENAI_API_KEY ? "YES" : "NO");
+
+// ======================
+// DB CONNECTION (SAFE)
 // ======================
 connectDB()
   .then(() => console.log("DB Connected"))
-  .catch((err) => console.log("DB Connection Failed (non-blocking):", err));
+  .catch((err) => {
+    console.log("❌ MongoDB Error:", err.message);
+    console.log("⚠️ Server will still run without DB");
+  });
 
 // ======================
 // APP INIT
 // ======================
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
 // ======================
-// ROOT ROUTE (TEST)
+// ROOT ROUTE
 // ======================
 app.get("/", (req, res) => {
   res.send("AI Diet Planner Backend Running ✅");
 });
 
 // ======================
-// OPENAI SETUP
+// OPENAI CLIENT
 // ======================
-let client = null;
-
-if (process.env.OPENAI_API_KEY) {
-  client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
-}
+const client = process.env.OPENAI_API_KEY
+  ? new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    })
+  : null;
 
 // ======================
-// FREE AI LOGIC
+// FREE AI (RULE BASED)
 // ======================
 function freeAI(message) {
   const msg = message.toLowerCase();
-
   let reply = [];
 
   if (msg.includes("hello") || msg.includes("hi")) {
     reply.push("Hello 👋 I am your AI Diet Assistant.");
   }
 
-  if (msg.includes("egg") && msg.includes("allergy")) {
-    reply.push(
-      "Egg allergy hai to eggs avoid karo 🥚❌. Paneer, tofu aur lentils use karo."
-    );
-  }
-
   if (msg.includes("sugar")) {
-    reply.push(
-      "Sugar gradually reduce karo 🍬. Fruits 🍎 aur healthy snacks use karo."
-    );
+    reply.push("Sugar reduce karo 🍬 aur fruits use karo 🍎");
   }
 
   if (msg.includes("weight")) {
-    reply.push(
-      "Weight loss ke liye walking 🚶 aur balanced diet follow karo."
-    );
+    reply.push("Walk 🚶 + balanced diet 🍽️ follow karo");
   }
 
   if (msg.includes("diet") || msg.includes("meal")) {
-    reply.push("Healthy meal 🍽️ = protein 🍗 + vegetables 🥗 + water 💧");
+    reply.push("Healthy meal = protein + veggies + water 💧");
   }
 
-  if (reply.length === 0) {
-    return null;
-  }
-
-  return reply.join("\n\n");
+  return reply.length ? reply.join("\n\n") : null;
 }
 
 // ======================
-// REAL AI (OPENAI)
+// REAL AI (OPENAI SAFE)
 // ======================
 async function realAI(msg) {
   try {
-    if (!client) return null;
+    if (!client) {
+      console.log("❌ OpenAI client not initialized");
+      return null;
+    }
 
     const response = await client.responses.create({
       model: "gpt-4o-mini",
       input: msg,
     });
 
-    return response.output_text;
+    console.log("✅ OpenAI response received");
+
+    let text = "";
+
+    if (response?.output?.length) {
+      for (const item of response.output) {
+        for (const c of item.content || []) {
+          if (c.text) text += c.text;
+        }
+      }
+    }
+
+    return text || null;
+
   } catch (error) {
-    console.log("OpenAI Error:", error);
+    console.log("❌ OpenAI Error:", error.message);
     return null;
   }
 }
 
 // ======================
-// CHAT ROUTE
+// CHAT API
 // ======================
 app.post("/chat", async (req, res) => {
   try {
     const message = req.body.message;
 
-    // FREE AI FIRST
+    // 1. FREE AI FIRST
     const freeReply = freeAI(message);
     if (freeReply) {
       return res.json({ reply: freeReply });
     }
 
-    // REAL AI
+    // 2. REAL AI
     const aiReply = await realAI(message);
+
     if (aiReply) {
       return res.json({ reply: aiReply });
     }
 
-    res.json({ reply: "AI temporarily unavailable ⚠️" });
+    // 3. FALLBACK
+    return res.json({
+      reply: "AI temporarily unavailable ⚠️",
+    });
+
   } catch (error) {
-    console.log(error);
+    console.log("Chat Error:", error.message);
     res.json({ reply: "System error ❌" });
   }
 });
@@ -134,13 +145,13 @@ app.post("/chat", async (req, res) => {
 app.post("/saveDiet", async (req, res) => {
   try {
     const newDiet = new Diet(req.body);
-
     await newDiet.save();
 
     res.json({
       success: true,
       message: "Diet Saved Successfully",
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -150,21 +161,10 @@ app.post("/saveDiet", async (req, res) => {
 });
 
 // ======================
-// START SERVER (RAILWAY SAFE)
+// START SERVER
 // ======================
-const startServer = async () => {
-  try {
-    await connectDB();
-    console.log("DB Connected");
-  } catch (err) {
-    console.log("DB Connection Failed (non-blocking):", err);
-  }
+const PORT = process.env.PORT || 8080;
 
-  const PORT = process.env.PORT;
-
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-  });
-};
-
-startServer();
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});

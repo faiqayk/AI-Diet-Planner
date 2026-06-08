@@ -18,16 +18,15 @@ export default function Chat() {
     setReply("AI is thinking... 🤖");
 
     try {
-
-      const res = await fetch("http://localhost:5000/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: message,
-        }),
-      });
+  const res = await fetch("https://ai-diet-planner-production-9040.up.railway.app/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      message: message,
+    }),
+  });
 
       const data = await res.json();
 
