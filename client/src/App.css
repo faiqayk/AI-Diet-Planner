@@ -220,3 +220,15 @@
   right: 0;
   border-right-color: var(--border);
 }
+/* Heading overlap ko theek karne ke liye code */
+#center h1, 
+#center h2, 
+.title { 
+  font-size: 3rem;       /* Aap isko apne mutabiq adjust kar sakte hain */
+  line-height: 1.2;      /* Yeh lines ke darmiyan munasib gap banayega */
+  font-weight: 700;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 10px;   /* Input fields se thoda gap rakhne ke liye */
+  word-wrap: break-word; /* Agar text bada ho toh screen se baahar na jaye */
+}
