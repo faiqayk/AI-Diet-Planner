@@ -53,6 +53,11 @@ body {
   min-height: 100vh;
   overflow-y: auto;
 }
+.dashboard-title {
+  font-size: 32px;
+  letter-spacing: normal;
+  margin-bottom: 20px;
+}
 
 /* CARD */
 .card {

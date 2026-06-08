@@ -63,8 +63,8 @@ export default function Dashboard() {
       {/* MAIN */}
       <div className="main">
 
-        <h1>AI Diet Planner 💖</h1>
-
+       <h1 className="dashboard-title">AI Diet Planner</h1>
+      
         <button className="modeBtn" onClick={() => setDarkMode(!darkMode)}>
           {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
         </button>
