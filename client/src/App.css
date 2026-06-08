@@ -1,40 +1,23 @@
-/* ================= GLOBAL RESET ================= */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
 body {
+  margin: 0;
+  font-family: Arial;
   overflow-x: hidden;
-  background: #fff0f5;
 }
-
-/* ================= DASHBOARD LAYOUT ================= */
 
 .dashboard {
   display: flex;
   min-height: 100vh;
-  width: 100%;
 }
 
-/* ================= SIDEBAR ================= */
-
+/* SIDEBAR */
 .sidebar {
   width: 220px;
-  background: #ffffff;
+  background: #fff;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   border-right: 1px solid #eee;
-}
-
-.sidebar h2 {
-  text-align: center;
-  color: hotpink;
 }
 
 .sidebar button {
@@ -43,15 +26,9 @@ body {
   border-radius: 10px;
   background: #ffe4ec;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.sidebar button:hover {
-  background: #ffb6c1;
-}
-
-/* ================= MAIN AREA ================= */
-
+/* MAIN */
 .main {
   flex: 1;
   padding: 30px;
@@ -60,51 +37,27 @@ body {
   gap: 20px;
 }
 
-.main h1 {
-  text-align: center;
-  color: hotpink;
-}
-
-/* ================= DARK MODE BUTTON ================= */
-
-.modeBtn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background: hotpink;
-  color: white;
-  cursor: pointer;
-  width: fit-content;
-  margin: auto;
-}
-
-/* ================= CARD ================= */
-
+/* CARD */
 .card {
   max-width: 500px;
-  width: 100%;
   margin: auto;
   padding: 25px;
   border-radius: 20px;
-  background: #ffffff;
+  background: white;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  gap: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* ================= INPUTS ================= */
-
-input,
-select {
+/* INPUTS */
+input, select {
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #ccc;
-  outline: none;
 }
 
-/* ================= BUTTONS ================= */
-
+/* BUTTONS */
 button {
   padding: 10px;
   border: none;
@@ -112,24 +65,17 @@ button {
   cursor: pointer;
   background: hotpink;
   color: white;
-  transition: 0.2s;
 }
 
-button:hover {
-  opacity: 0.9;
-}
-
-/* ================= RESULT BOX ================= */
-
+/* RESULT */
 .result {
   margin-top: 10px;
-  padding: 15px;
+  padding: 10px;
   background: #ffe4ec;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
-/* ================= DARK MODE ================= */
-
+/* DARK MODE */
 .dashboard.dark {
   background: #1e1e1e;
   color: white;
@@ -137,46 +83,9 @@ button:hover {
 
 .dashboard.dark .sidebar {
   background: #2c2c2c;
-  border-right: 1px solid #444;
-}
-
-.dashboard.dark .sidebar button {
-  background: #444;
-  color: white;
-}
-
-.dashboard.dark .sidebar button:hover {
-  background: #666;
 }
 
 .dashboard.dark .card {
   background: #2c2c2c;
   color: white;
-}
-
-.dashboard.dark .result {
-  background: #444;
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media (max-width: 768px) {
-  .dashboard {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .main {
-    padding: 15px;
-  }
-
-  .card {
-    width: 95%;
-  }
 }
