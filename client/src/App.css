@@ -1,223 +1,182 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-}
+/* ================= GLOBAL RESET ================= */
 
-.counter:hover {
-  border-color: var(--accent-border);
-}
-
-.counter:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* ================= HERO ================= */
-
-.hero {
-  position: relative;
-  min-height: 260px;
-  margin-bottom: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.hero .base {
-  width: 170px;
-  position: relative;
-  z-index: 1;
-  display: block;
-}
-
-.hero .framework,
-.hero .vite {
-  position: absolute;
-  inset-inline: 0;
-  margin: 0 auto;
-}
-
-/* Framework */
-.hero .framework {
-  z-index: 2;
-  top: 34px;
-  height: 28px;
-  transform: perspective(2000px)
-    rotateZ(300deg)
-    rotateX(44deg)
-    rotateY(39deg)
-    scale(1.4);
-}
-
-/* Vite */
-.hero .vite {
-  z-index: 1;
-  top: 107px;
-  height: 26px;
-  width: auto;
-  transform: perspective(2000px)
-    rotateZ(300deg)
-    rotateX(40deg)
-    rotateY(39deg)
-    scale(0.8);
-}
-
-/* ================= CENTER ================= */
-
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-  padding: 32px 20px 24px;
-}
-
-#center h1,
-#center h2,
-#center h3,
-#center p {
-  line-height: 1.4;
+* {
   margin: 0;
-}
-
-@media (max-width: 1024px) {
-  #center {
-    gap: 18px;
-  }
-}
-
-/* ================= NEXT STEPS ================= */
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-}
-
-#next-steps > div {
-  flex: 1 1 0;
-  padding: 32px;
-}
-
-#next-steps .icon {
-  margin-bottom: 16px;
-  width: 22px;
-  height: 22px;
-}
-
-/* MOBILE */
-@media (max-width: 1024px) {
-  #next-steps {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  #next-steps > div {
-    padding: 24px 20px;
-  }
-}
-
-/* DOCS BORDER FIX */
-#docs {
-  border-right: 1px solid var(--border);
-}
-
-@media (max-width: 1024px) {
-  #docs {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-/* ================= SOCIAL LINKS ================= */
-
-#next-steps ul {
-  list-style: none;
   padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+  background: #fff0f5;
+}
+
+/* ================= DASHBOARD LAYOUT ================= */
+
+.dashboard {
   display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-}
-
-#next-steps ul a {
-  color: var(--text-h);
-  font-size: 16px;
-  border-radius: 6px;
-  background: var(--social-bg);
-  display: flex;
-  padding: 6px 12px;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  transition: box-shadow 0.3s;
-}
-
-#next-steps ul a:hover {
-  box-shadow: var(--shadow);
-}
-
-/* MOBILE SOCIAL */
-@media (max-width: 1024px) {
-  #next-steps ul {
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  #next-steps ul li {
-    flex: 1 1 calc(50% - 8px);
-  }
-
-  #next-steps ul a {
-    width: 100%;
-    justify-content: center;
-    box-sizing: border-box;
-  }
-}
-
-/* ================= SPACER ================= */
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-}
-
-@media (max-width: 1024px) {
-  #spacer {
-    height: 48px;
-  }
-}
-
-/* ================= TICKS ================= */
-
-.ticks {
-  position: relative;
+  min-height: 100vh;
   width: 100%;
 }
 
-.ticks::before,
-.ticks::after {
-  content: "";
-  position: absolute;
-  top: -4.5px;
-  border: 5px solid transparent;
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+  width: 220px;
+  background: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-right: 1px solid #eee;
 }
 
-.ticks::before {
-  left: 0;
-  border-left-color: var(--border);
+.sidebar h2 {
+  text-align: center;
+  color: hotpink;
 }
 
-.ticks::after {
-  right: 0;
-  border-right-color: var(--border);
+.sidebar button {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #ffe4ec;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sidebar button:hover {
+  background: #ffb6c1;
+}
+
+/* ================= MAIN AREA ================= */
+
+.main {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main h1 {
+  text-align: center;
+  color: hotpink;
+}
+
+/* ================= DARK MODE BUTTON ================= */
+
+.modeBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: hotpink;
+  color: white;
+  cursor: pointer;
+  width: fit-content;
+  margin: auto;
+}
+
+/* ================= CARD ================= */
+
+.card {
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  padding: 25px;
+  border-radius: 20px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ================= INPUTS ================= */
+
+input,
+select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* ================= BUTTONS ================= */
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: hotpink;
+  color: white;
+  transition: 0.2s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* ================= RESULT BOX ================= */
+
+.result {
+  margin-top: 10px;
+  padding: 15px;
+  background: #ffe4ec;
+  border-radius: 12px;
+}
+
+/* ================= DARK MODE ================= */
+
+.dashboard.dark {
+  background: #1e1e1e;
+  color: white;
+}
+
+.dashboard.dark .sidebar {
+  background: #2c2c2c;
+  border-right: 1px solid #444;
+}
+
+.dashboard.dark .sidebar button {
+  background: #444;
+  color: white;
+}
+
+.dashboard.dark .sidebar button:hover {
+  background: #666;
+}
+
+.dashboard.dark .card {
+  background: #2c2c2c;
+  color: white;
+}
+
+.dashboard.dark .result {
+  background: #444;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .main {
+    padding: 15px;
+  }
+
+  .card {
+    width: 95%;
+  }
 }
