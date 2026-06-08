@@ -18,39 +18,35 @@
   outline-offset: 2px;
 }
 
-/* HERO FIXED */
+/* ================= HERO ================= */
+
 .hero {
   position: relative;
-  min-height: 240px;
+  min-height: 260px;
   margin-bottom: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
-.hero .base,
+.hero .base {
+  width: 170px;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
 .hero .framework,
 .hero .vite {
+  position: absolute;
   inset-inline: 0;
   margin: 0 auto;
 }
 
-/* Base image */
-.hero .base {
-  width: 170px;
-  position: relative;
-  z-index: 0;
-}
-
-/* Floating images */
-.hero .framework,
-.hero .vite {
-  position: absolute;
-}
-
-/* Framework styling */
+/* Framework */
 .hero .framework {
-  z-index: 1;
+  z-index: 2;
   top: 34px;
   height: 28px;
   transform: perspective(2000px)
@@ -60,9 +56,9 @@
     scale(1.4);
 }
 
-/* Vite styling */
+/* Vite */
 .hero .vite {
-  z-index: 0;
+  z-index: 1;
   top: 107px;
   height: 26px;
   width: auto;
@@ -73,7 +69,8 @@
     scale(0.8);
 }
 
-/* CENTER SECTION FIX */
+/* ================= CENTER ================= */
+
 #center {
   display: flex;
   flex-direction: column;
@@ -84,13 +81,22 @@
   padding: 32px 20px 24px;
 }
 
+#center h1,
+#center h2,
+#center h3,
+#center p {
+  line-height: 1.4;
+  margin: 0;
+}
+
 @media (max-width: 1024px) {
   #center {
     gap: 18px;
   }
 }
 
-/* NEXT STEPS */
+/* ================= NEXT STEPS ================= */
+
 #next-steps {
   display: flex;
   border-top: 1px solid var(--border);
@@ -132,17 +138,14 @@
   }
 }
 
-/* SOCIAL LINKS */
+/* ================= SOCIAL LINKS ================= */
+
 #next-steps ul {
   list-style: none;
   padding: 0;
   display: flex;
   gap: 8px;
   margin: 32px 0 0;
-}
-
-#next-steps ul .logo {
-  height: 18px;
 }
 
 #next-steps ul a {
@@ -162,16 +165,12 @@
   box-shadow: var(--shadow);
 }
 
-#next-steps ul .button-icon {
-  height: 18px;
-  width: 18px;
-}
-
+/* MOBILE SOCIAL */
 @media (max-width: 1024px) {
   #next-steps ul {
-    margin-top: 20px;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 20px;
   }
 
   #next-steps ul li {
@@ -185,7 +184,8 @@
   }
 }
 
-/* SPACER */
+/* ================= SPACER ================= */
+
 #spacer {
   height: 88px;
   border-top: 1px solid var(--border);
@@ -197,7 +197,8 @@
   }
 }
 
-/* TICKS */
+/* ================= TICKS ================= */
+
 .ticks {
   position: relative;
   width: 100%;
@@ -219,22 +220,4 @@
 .ticks::after {
   right: 0;
   border-right-color: var(--border);
-}
-/* ====================================================
-   SUPER ULTIMATE OVERLAP FIX (Put at the very bottom)
-   ==================================================== */
-
-/* 1. Target all possible headings inside #center and .hero */
-#center h1, #center h2, #center h3, #center p, 
-.hero h1, .hero h2, .hero p, .title, h1, h2 {
-  line-height: 1.4 !important;      /* Lines ko alag karne ke liye zaroori gap */
-  letter-spacing: normal !important; /* Agar characters aapas mein jure hain */
-  height: auto !important;          /* Agar height restricted thi */
-  overflow: visible !important;     /* Text ko chhupne se rokne ke liye */
-}
-
-/* 2. Agar text kisi flex/absolute position ki wajah se daba hua hai */
-.hero {
-  height: auto !important;
-  min-height: fit-content !important;
 }
