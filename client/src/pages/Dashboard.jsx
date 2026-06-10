@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../App.css";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -63,8 +64,8 @@ export default function Dashboard() {
       {/* MAIN */}
       <div className="main">
 
-       <h1 className="dashboard-title">AI Diet Planner</h1>
-      
+        <h1>AI Diet Planner </h1>
+
         <button className="modeBtn" onClick={() => setDarkMode(!darkMode)}>
           {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
         </button>

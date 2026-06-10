@@ -1,9 +1,14 @@
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
+/* ==========================================
+   🌸 FITAI SOFT PINK THEME + WORKING DARK MODE 🌙
+   ========================================== */
+
 
 body {
   margin: 0;
@@ -15,13 +20,20 @@ body {
 
 /* DASHBOARD LAYOUT */
 .dashboard {
-  display: flex;
+  display: flex !important;
+  flex-direction: row !important;
   min-height: 100vh;
+
   width: 100%;
+
+  width: 100% !important;
+  box-sizing: border-box;
+
 }
 
-/* SIDEBAR */
+/* SIDEBAR STYLING */
 .sidebar {
+
   width: 220px;
   flex-shrink: 0;
   height: 100vh;
@@ -33,18 +45,47 @@ body {
   flex-direction: column;
   gap: 12px;
   border-right: 1px solid #eee;
+
+  width: 240px !important;
+  min-width: 240px !important;
+  max-width: 240px !important;
+  background: #ffffff !important; 
+  padding: 24px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px;
+  border-right: 1px solid #f9dae5;
+  box-sizing: border-box;
+}
+
+.sidebar h2 {
+  text-align: center;
+  color: #ff4081; 
+  margin-top: 0;
+  margin-bottom: 10px;
+
 }
 
 .sidebar button {
-  padding: 10px;
+  padding: 12px 16px;
   border: none;
-  border-radius: 10px;
-  background: #ffe4ec;
+  border-radius: 12px;
+  background: #fff0f5; 
+  color: #c2185b; 
+  font-weight: 600;
   cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
 }
 
-/* MAIN */
+.sidebar button:hover {
+  background: #ffdae9;
+  color: #ff4081;
+}
+
+/* MAIN CONTENT AREA - Light Mode Soft Pink Background */
 .main {
+
   flex: 1;
   padding: 30px;
   display: flex;
@@ -86,30 +127,172 @@ button {
   padding: 10px;
   border: none;
   border-radius: 10px;
+
+  flex: 1 !important;
+  padding: 40px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 24px;
+  box-sizing: border-box;
+  background: #fdf2f4 !important; /* Chatbot page background */
+}
+
+.main h1 {
+  color: #2b101d;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+/* MODE BUTTON */
+.modeBtn {
+  padding: 10px 20px;
+  background: #ffffff;
+  color: #c2185b;
+  border: 1px solid #ffdae9;
+  border-radius: 20px;
+  font-weight: bold;
+ 
   cursor: pointer;
-  background: hotpink;
-  color: white;
+  transition: 0.2s;
 }
 
-/* RESULT */
+.modeBtn:hover {
+  background: #fff0f5;
+}
+
+/* --- THE CARD CONTAINER --- */
+.card {
+  max-width: 750px !important;
+  width: 100% !important;
+  padding: 30px;
+  border-radius: 24px; 
+  background: #ffffff !important; 
+  border: 1px solid #f9dae5;
+  box-shadow: 0 10px 30px rgba(223, 161, 183, 0.15) !important; 
+  box-sizing: border-box !important;
+  
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important; 
+  gap: 16px !important;
+  justify-content: center !important;
+}
+
+/* INPUTS AND SELECT DROPDOWNS */
+.card input, 
+.card select {
+  display: block !important;
+  flex: 1 1 calc(33.33% - 12px) !important;
+  min-width: 160px !important;
+  height: 48px !important;
+  padding: 10px 16px !important;
+  border-radius: 12px !important;
+  border: 1px solid #e0d0d5 !important;
+  background: #ffffff !important;
+  color: #333 !important;
+  font-size: 15px !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease;
+}
+
+.card input:focus, 
+.card select:focus {
+  border-color: #ff4081 !important;
+}
+
+/* CARD ACTION BUTTONS */
+.card button {
+  display: block !important;
+  flex: 1 1 calc(50% - 8px) !important;
+  min-width: 160px !important;
+  height: 50px !important;
+  padding: 12px 20px !important;
+  border: none !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  font-weight: bold !important;
+  font-size: 15px !important;
+  color: #fff !important;
+  box-sizing: border-box !important;
+  margin-top: 8px !important;
+}
+
+.card button:nth-of-type(1) {
+  background: #bc3aff !important; 
+}
+
+.card button:nth-of-type(2) {
+  background: #756a73 !important; 
+}
+
+/* RESULT VIEW SECTION */
 .result {
-  margin-top: 10px;
-  padding: 10px;
-  background: #ffe4ec;
-  border-radius: 10px;
+  flex: 1 1 100% !important;
+  margin-top: 15px !important;
+  padding: 20px !important;
+  background: #fff5f7 !important; 
+  border-left: 4px solid #bc3aff !important;
+  border-radius: 10px !important;
+  text-align: left !important;
+  box-sizing: border-box !important;
 }
 
-/* DARK MODE */
+.result pre {
+  font-family: inherit !important;
+  margin: 0 0 12px 0 !important;
+  white-space: pre-line !important;
+  color: #423039 !important;
+  font-size: 16px;
+}
+
+.result p {
+  margin: 0 !important;
+  font-weight: bold !important;
+  font-size: 18px !important;
+  color: #bc3aff !important;
+}
+
+
+/* ==========================================
+   🌙 DARK MODE OVERRIDES (FIXED WITH !IMPORTANT)
+   ========================================== */
+
 .dashboard.dark {
-  background: #1e1e1e;
-  color: white;
+  background: #121212 !important;
+}
+
+.dashboard.dark .main {
+  background: #1a1a1a !important; /* Dark theme background */
+}
+
+.dashboard.dark .main h1 {
+  color: #ffffff !important;
 }
 
 .dashboard.dark .sidebar {
-  background: #2c2c2c;
+  background: #1e1e1e !important;
+  border-right-color: #2d2d2d !important;
+}
+
+.dashboard.dark .sidebar button {
+  background: #2d2d2d !important;
+  color: #ff8da1 !important;
+}
+
+.dashboard.dark .sidebar button:hover {
+  background: #3d3d3d !important;
+}
+
+.dashboard.dark .modeBtn {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+  border-color: #444 !important;
 }
 
 .dashboard.dark .card {
+
   background: #2c2c2c;
   color: white;
 }
@@ -120,4 +303,25 @@ button {
   margin-bottom: 20px !important;
   text-align: center;
   color: #ff1493;
+
+  background: #2d2d2d !important;
+  border-color: #444 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dashboard.dark .card input,
+.dashboard.dark .card select {
+  background: #1e1e1e !important;
+  border-color: #444 !important;
+  color: #ffffff !important;
+}
+
+.dashboard.dark .result {
+  background: #1e1e1e !important;
+  border-left-color: #bc3aff !important;
+}
+
+.dashboard.dark .result pre {
+  color: #e0e0e0 !important;
+ 
 }
