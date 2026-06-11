@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 
-export default function Dashboard() {
+export default function Dashboard({ history, setHistory }) {
   const navigate = useNavigate();
 
   const [age, setAge] = useState("");
@@ -32,9 +32,33 @@ export default function Dashboard() {
     }
 
     setDietPlan(plan);
+
+    // 🚨 Safe LocalStorage Saving
+    localStorage.setItem("age", age);
+    localStorage.setItem("gender", gender);
+    localStorage.setItem("height", height);
+    localStorage.setItem("weight", weight);
+    localStorage.setItem("dietLevel", dietLevel);
+
+    if (setHistory) {
+      const newHistoryItem = {
+        type: "Diet Plan Generated",
+        age: age,
+        gender: gender,
+        dietLevel: dietLevel,
+        result: plan,
+        date: new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString()
+      };
+      setHistory([...history, newHistoryItem]);
+    }
   };
 
   const calculateBMI = () => {
+    if (!height || !weight) {
+      alert("Please enter height and weight first");
+      return;
+    }
+
     const h = height / 100;
     const result = (weight / (h * h)).toFixed(1);
 
@@ -43,16 +67,27 @@ export default function Dashboard() {
     else if (result < 25) status = "Normal";
     else status = "Overweight";
 
-    setBMI(`${result} (${status})`);
+    const finalBmi = `${result} (${status})`;
+    setBMI(finalBmi);
+
+    if (setHistory) {
+      const newHistoryItem = {
+        type: "BMI Calculated",
+        age: age || "N/A",
+        gender: gender || "N/A",
+        dietLevel: dietLevel || "N/A",
+        result: `BMI: ${finalBmi}`,
+        date: new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString()
+      };
+      setHistory([...history, newHistoryItem]);
+    }
   };
 
   return (
     <div className={`dashboard ${darkMode ? "dark" : ""}`}>
-
       {/* SIDEBAR */}
       <div className="sidebar">
         <h2>💖 FitAI</h2>
-
         <button onClick={() => navigate("/dashboard")}>🏠 Dashboard</button>
         <button onClick={() => navigate("/chat")}>🤖 AI Chat</button>
         <button onClick={() => navigate("/history")}>📜 History</button>
@@ -63,15 +98,13 @@ export default function Dashboard() {
 
       {/* MAIN */}
       <div className="main">
-
-        <h1>AI Diet Planner </h1>
+        <h1>AI Diet Planner</h1>
 
         <button className="modeBtn" onClick={() => setDarkMode(!darkMode)}>
           {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
         </button>
 
         <div className="card">
-
           <input placeholder="Age" value={age} onChange={(e) => setAge(e.target.value)} />
           <input placeholder="Height (cm)" value={height} onChange={(e) => setHeight(e.target.value)} />
           <input placeholder="Weight (kg)" value={weight} onChange={(e) => setWeight(e.target.value)} />
@@ -96,7 +129,6 @@ export default function Dashboard() {
             <pre>{dietPlan}</pre>
             <p>{bmi}</p>
           </div>
-
         </div>
       </div>
     </div>

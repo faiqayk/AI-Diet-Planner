@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react"; 
 
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -8,38 +9,28 @@ import UserProfile from "./pages/UserProfile";
 import Exercise from "./pages/Exercise";
 
 export default function App() {
-
-  // Global History State
-  const historyData = [];
+  const [historyData, setHistoryData] = useState([]);
 
   return (
     <BrowserRouter>
-
       <Routes>
-
-        {/* LOGIN PAGE */}
         <Route path="/" element={<Login />} />
+        
+        {/* Dashboard ko sirf history pass ki */}
+        <Route 
+          path="/dashboard" 
+          element={<Dashboard history={historyData} setHistory={setHistoryData} />} 
+        />
 
-        {/* DASHBOARD PAGE */}
-        <Route path="/dashboard" element={<Dashboard />} />
-
-        {/* HISTORY PAGE */}
         <Route
           path="/history"
           element={<History history={historyData} darkMode={false} />}
         />
 
-        {/* AI CHAT PAGE */}
         <Route path="/chat" element={<Chat />} />
-
-        {/* USER PROFILE PAGE */}
         <Route path="/profile" element={<UserProfile />} />
-
-        {/* EXERCISE PAGE */}
-        <Route path="/exercise" element={<Exercise />} />
-
+        <Route path="/exercise" element={<Exercise history={historyData} setHistory={setHistoryData} />} />
       </Routes>
-
     </BrowserRouter>
   );
 }
