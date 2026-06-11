@@ -28,7 +28,7 @@ export default function Login() {
         }}
       >
         <h1 className="login-title">
-          AI Diet Planner 💖
+          AI Diet Planner 
         </h1>
 
         <input

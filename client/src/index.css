@@ -1,130 +1,131 @@
-/* RESET */
-
+/* =========================
+   RESET + BASE
+========================= */
 
 * {
   margin: 0;
   padding: 0;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-/* --- SIRF IS SECTION KO UPDATE KAREIN --- */
-
-body {
-  margin: 0;
-  background: var(--bg); /* Taake body ka background bhi sync rahe */
-  color: var(--text);
-}
-
-#root {
-  width: 100%; /* 1126px hata kar 100% kiya taake dashboard khul kar aaye */
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-
   box-sizing: border-box;
-  /* text-align: center; ko HATA DIYA taake sidebar aur inputs left-align ho sakein */
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* BODY */
+html, body {
+  height: 100%;
+}
 
 body {
-  margin: 0;
-  padding: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.3s ease;
   overflow-x: hidden;
-  font-family: Arial, sans-serif;
-  background: #fff0f5;
 }
 
+/* =========================
+   THEME VARIABLES (LIGHT)
+========================= */
 
-/* ROOT */
+:root {
+  --bg: #ffe4ef;
+  --card: #ffffff;
+  --primary: #ff2d95;
+  --text: #222;
+  --input-border: #ff85b8;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================
+   DARK MODE (PINK THEME)
+   Add class="dark" on body
+========================= */
+
+body.dark {
+  --bg: #1a0f14;
+  --card: #2a1620;
+  --primary: #ff4fa3;
+  --text: #ffffff;
+  --input-border: #ff4fa3;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================
+   ROOT LAYOUT
+========================= */
 
 #root {
   width: 100%;
   min-height: 100vh;
-  margin: 0;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-/* HEADINGS */
+/* =========================
+   TYPOGRAPHY
+========================= */
 
 h1 {
-  font-size: 48px;
-  line-height: 1.3;
-  letter-spacing: normal;
-  margin-bottom: 20px;
-  font-weight: 700;
+  font-size: 56px;
+  margin: 32px 0;
+  text-align: center;
+  color: var(--text);
 }
 
 h2 {
   font-size: 24px;
-  line-height: 1.3;
   margin-bottom: 10px;
+  color: var(--text);
 }
 
 p {
+  color: var(--text);
   margin: 0;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  text-align: center; /* H1 ko center rakhne ke liye yahan alag se de diya */
-  
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-
-
-/* FORM ELEMENTS */
+/* =========================
+   FORM ELEMENTS
+========================= */
 
 input,
 select,
-button,
-textarea {
-  font-family: Arial, sans-serif;
+textarea,
+button {
+  font-family: inherit;
+  border: 1px solid var(--input-border);
+  outline: none;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
 }
 
-/* MOBILE */
+/* Buttons */
+button {
+  cursor: pointer;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   CARDS (optional use)
+========================= */
+
+.card {
+  background: var(--card);
+  box-shadow: var(--shadow);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
 
 @media (max-width: 768px) {
   h1 {

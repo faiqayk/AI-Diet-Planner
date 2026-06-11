@@ -100,19 +100,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* CARD */
-.card {
-  max-width: 500px;
-  width: 100%;
-  margin: auto;
-  padding: 25px;
-  border-radius: 20px;
-  background: white;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+
 
 /* INPUTS */
 input,
@@ -121,21 +109,11 @@ select {
   border-radius: 10px;
   border: 1px solid #ccc;
 }
-
-/* BUTTONS */
 button {
   padding: 10px;
   border: none;
   border-radius: 10px;
-
-  flex: 1 !important;
-  padding: 40px;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 24px;
   box-sizing: border-box;
-  background: #fdf2f4 !important; /* Chatbot page background */
 }
 
 .main h1 {
@@ -304,9 +282,9 @@ button {
   text-align: center;
   color: #ff1493;
 
-  background: #2d2d2d !important;
-  border-color: #444 !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .dashboard.dark .card input,
